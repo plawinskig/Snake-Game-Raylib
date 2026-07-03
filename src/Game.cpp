@@ -57,6 +57,8 @@ void Game::draw() const
 
 void Game::setFruit()
 {
+    std::vector<Vector2> empty_cells = getEmptyCells();
+
     bool fruit_placed = false;
     while (!fruit_placed)
     {
@@ -118,6 +120,27 @@ void Game::getSnakeDirectionFromInput()
     if (IsKeyPressed(KEY_S)) { snake_new_direction_ = {0, 1}; }
     if (IsKeyPressed(KEY_A)) { snake_new_direction_ = {-1, 0}; }
     if (IsKeyPressed(KEY_D)) { snake_new_direction_ = {1, 0}; }
+}
+
+std::vector<Vector2> Game::getEmptyCells() const
+{
+    std::vector<Vector2> empty_cells;
+    empty_cells.reserve(CELL_COUNT_X * CELL_COUNT_Y);
+
+    for (int i = 0; i < CELL_COUNT_X; ++i)
+    {
+        for (int j = 0; j < CELL_COUNT_Y; ++j)
+        {
+            Vector2 vec = {i, j};
+
+            if (!snake_.occupies(vec))
+            {
+                empty_cells.push_back(vec);
+            }
+        }
+    }
+
+    return empty_cells;
 }
 
 void Game::eatFruit()

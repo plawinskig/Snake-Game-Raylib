@@ -1,5 +1,6 @@
 #pragma once
 
+#include <vector>
 #include "Snake.hpp"
 
 class Game
@@ -33,6 +34,7 @@ private:
     void drawSnake() const;
     void drawFruit() const;
     void getSnakeDirectionFromInput();
+    std::vector<Vector2> getEmptyCells() const;
     void eatFruit();
 
     static void drawCell(int pos_x, int pos_y, Color col);
