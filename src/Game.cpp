@@ -131,7 +131,7 @@ std::vector<Vector2> Game::getEmptyCells() const
     {
         for (int j = 0; j < CELL_COUNT_Y; ++j)
         {
-            Vector2 vec = {i, j};
+            Vector2 vec = {static_cast<float>(i), static_cast<float>(j)};
 
             if (!snake_.occupies(vec))
             {
