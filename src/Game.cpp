@@ -59,17 +59,8 @@ void Game::setFruit()
 {
     std::vector<Vector2> empty_cells = getEmptyCells();
 
-    bool fruit_placed = false;
-    while (!fruit_placed)
-    {
-        fruit_pos_.x = GetRandomValue(0, CELL_COUNT_X - 1);
-        fruit_pos_.y = GetRandomValue(0, CELL_COUNT_Y - 1);
-
-        if (!snake_.occupies(fruit_pos_)) 
-        {
-            fruit_placed = true;
-        }
-    }
+    int idx = GetRandomValue(0, empty_cells.size() - 1);
+    fruit_pos_ = empty_cells[idx];
 }
 
 void Game::resetGame()
