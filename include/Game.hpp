@@ -1,19 +1,12 @@
 #pragma once
 
 #include <vector>
+#include <deque>
 #include "Snake.hpp"
 
 class Game
 {
 public:
-    Game() 
-        : fruit_pos_({0, 0}), 
-        snake_new_direction_({1, 0}), 
-        snake_(Snake()), 
-        timer_(MOVE_TIME_DURATION_SECONDS) 
-    {
-    }
-
     static constexpr int CELL_SIZE = 100;
     static constexpr int CELL_COUNT_X = 10;
     static constexpr int CELL_COUNT_Y = 9;
@@ -22,6 +15,16 @@ public:
     static constexpr Color LIGHT_GRAY = {70, 70, 70, 255};
 
     static constexpr float MOVE_TIME_DURATION_SECONDS = 0.2f;
+    
+    static constexpr int MAX_INPUT_NUMBER_BUFFER = 2;
+
+    Game() 
+        : fruit_pos_({0, 0}), 
+        input_queue_(std::deque<Vector2>()), 
+        snake_(Snake()), 
+        timer_(MOVE_TIME_DURATION_SECONDS) 
+    {
+    }
 
     void runGame();
     
@@ -41,7 +44,7 @@ private:
     static void drawBackground();
     
     Vector2 fruit_pos_;
-    Vector2 snake_new_direction_;
+    std::deque<Vector2> input_queue_;
     Snake snake_;
 
     float timer_;

@@ -19,14 +19,20 @@ void Game::runGame()
 void Game::update()
 {
     getSnakeDirectionFromInput();
-
     timer_ -= GetFrameTime();
 
     if (timer_ <= 0)
     {
         timer_ += MOVE_TIME_DURATION_SECONDS;
         
-        snake_.move(snake_new_direction_);
+        Vector2 move_dir = snake_.getDirection();
+        if (!input_queue_.empty())
+        {
+            move_dir = input_queue_.front();
+            input_queue_.pop_front();
+        }
+        
+        snake_.move(move_dir);
 
         snake_.wrap(CELL_COUNT_X, CELL_COUNT_Y);
     
@@ -66,7 +72,7 @@ void Game::setFruit()
 void Game::resetGame()
 {
     snake_.reset();
-    snake_new_direction_ = {1, 0};
+    input_queue_.clear();
     setFruit();
     timer_ = MOVE_TIME_DURATION_SECONDS;
 }
@@ -107,10 +113,17 @@ void Game::drawFruit() const
 
 void Game::getSnakeDirectionFromInput()
 {
-    if (IsKeyPressed(KEY_W)) { snake_new_direction_ = {0, -1}; }
-    if (IsKeyPressed(KEY_S)) { snake_new_direction_ = {0, 1}; }
-    if (IsKeyPressed(KEY_A)) { snake_new_direction_ = {-1, 0}; }
-    if (IsKeyPressed(KEY_D)) { snake_new_direction_ = {1, 0}; }
+    Vector2 new_dir = {0, 0};
+
+    if (IsKeyPressed(KEY_W)) { new_dir = {0, -1}; }
+    else if (IsKeyPressed(KEY_S)) { new_dir = {0, 1}; }
+    else if (IsKeyPressed(KEY_A)) { new_dir = {-1, 0}; }
+    else if (IsKeyPressed(KEY_D)) { new_dir = {1, 0}; }
+
+    if ((new_dir.x != 0 || new_dir.y != 0) && input_queue_.size() < MAX_INPUT_NUMBER_BUFFER)
+    {
+        input_queue_.push_back(new_dir);
+    }
 }
 
 std::vector<Vector2> Game::getEmptyCells() const
