@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <tuple>
 
 void Game::runGame()
 {
@@ -83,7 +84,7 @@ void Game::resetGame()
 {
     snake_.reset();
     input_queue_.clear();
-    setFruit();
+    std::ignore = setFruit();
     timer_ = MOVE_TIME_DURATION_SECONDS;
 }
 
