@@ -138,7 +138,15 @@ void Game::getSnakeDirectionFromInput()
 
     if ((new_dir.x != 0 || new_dir.y != 0) && input_queue_.size() < MAX_INPUT_NUMBER_BUFFER)
     {
-        input_queue_.push_back(new_dir);
+        Vector2 last_dir = input_queue_.empty() ? snake_.getDirection() : input_queue_.back();
+
+        bool is_same = (new_dir.x == last_dir.x && new_dir.y == last_dir.y);
+        bool is_opposite = (new_dir.x == -last_dir.x && new_dir.y == -last_dir.y);
+
+        if (!is_same && !is_opposite)
+        {
+            input_queue_.push_back(new_dir);
+        }
     }
 }
 
