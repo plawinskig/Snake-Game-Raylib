@@ -1,6 +1,11 @@
 #include "Game.hpp"
 #include <tuple>
 
+Game::Game()
+{
+    empty_cells_.reserve(CELL_COUNT_X * CELL_COUNT_Y);
+}
+
 void Game::runGame()
 {
     InitWindow(CELL_SIZE * CELL_COUNT_X, CELL_SIZE * CELL_COUNT_Y, "Game of snake");
@@ -140,7 +145,6 @@ void Game::getSnakeDirectionFromInput()
 void Game::getEmptyCells()
 {
     empty_cells_.clear();
-    empty_cells_.reserve(CELL_COUNT_X * CELL_COUNT_Y);
 
     for (int i = 0; i < CELL_COUNT_X; ++i)
     {

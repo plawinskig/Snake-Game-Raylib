@@ -18,6 +18,8 @@ public:
     
     static constexpr int MAX_INPUT_NUMBER_BUFFER = 2;
 
+    Game();
+
     void runGame();
     
 private:
