@@ -22,8 +22,8 @@ public:
 
     void setDirection(const Vector2 &direction) { direction_ = direction; }
 
-    bool isColliding() const;
-    bool occupies(const Vector2 &pos) const;
+    [[nodiscard]] bool isColliding() const;
+    [[nodiscard]] bool occupies(const Vector2 &pos) const;
 
     void move(const Vector2 &new_direction);
     void wrap(int max_x, int max_y);

@@ -24,13 +24,13 @@ private:
     void update();
     void draw() const;
 
-    bool setFruit();
+    [[nodiscard]] bool setFruit();
     void resetGame();
     void drawSnake() const;
     void drawFruit() const;
     void getSnakeDirectionFromInput();
     std::vector<Vector2> getEmptyCells() const;
-    bool eatFruit();
+    [[nodiscard]] bool eatFruit();
 
     static void drawCell(int pos_x, int pos_y, Color col);
     static void drawBackground();
