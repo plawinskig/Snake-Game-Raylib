@@ -33,15 +33,18 @@ void Game::update()
         }
         
         snake_.move(move_dir);
-
         snake_.wrap(CELL_COUNT_X, CELL_COUNT_Y);
     
-        eatFruit();
+        if (eatFruit()) 
+        {
+            return; 
+        }
 
         if(snake_.isColliding())
         {
             WaitTime(1);
             resetGame();
+            return;
         }
     }
 }
@@ -154,7 +157,7 @@ std::vector<Vector2> Game::getEmptyCells() const
     return empty_cells;
 }
 
-void Game::eatFruit()
+bool Game::eatFruit()
 {
     if (snake_.getHeadPos().x == fruit_pos_.x &&
         snake_.getHeadPos().y == fruit_pos_.y)
@@ -165,6 +168,9 @@ void Game::eatFruit()
         {
             WaitTime(1);
             resetGame();
+            return true;
         }
     }
+
+    return false;
 }

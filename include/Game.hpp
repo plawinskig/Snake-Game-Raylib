@@ -38,7 +38,7 @@ private:
     void drawFruit() const;
     void getSnakeDirectionFromInput();
     std::vector<Vector2> getEmptyCells() const;
-    void eatFruit();
+    bool eatFruit();
 
     static void drawCell(int pos_x, int pos_y, Color col);
     static void drawBackground();
