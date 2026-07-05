@@ -23,7 +23,7 @@ void Game::update()
 
     if (timer_ <= 0)
     {
-        timer_ += MOVE_TIME_DURATION_SECONDS;
+        timer_ = MOVE_TIME_DURATION_SECONDS;
         
         Vector2 move_dir = snake_.getDirection();
         if (!input_queue_.empty())
