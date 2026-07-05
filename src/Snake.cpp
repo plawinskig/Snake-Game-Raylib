@@ -22,13 +22,10 @@ void Snake::move(const Vector2 &new_direction)
 
 void Snake::wrap(int max_x, int max_y)
 {
-    for (auto &segment : body_)
-    {
-        if (segment.x >= max_x) { segment.x = 0; }
-        if (segment.y >= max_y) { segment.y = 0; }
-        if (segment.x < 0) { segment.x = max_x - 1; }
-        if (segment.y < 0) { segment.y = max_y - 1; }
-    }
+    if (body_[0].x >= max_x) { body_[0].x = 0; }
+    if (body_[0].y >= max_y) { body_[0].y = 0; }
+    if (body_[0].x < 0) { body_[0].x = max_x - 1; }
+    if (body_[0].y < 0) { body_[0].y = max_y - 1; }
 }
 
 bool Snake::isColliding() const
