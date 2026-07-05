@@ -1,8 +1,7 @@
 #include "Snake.hpp"
 
-Snake::Snake()
-    : body_(std::deque<Vector2>()),
-    direction_({1, 0})
+Snake::Snake() 
+    : direction_({1, 0})
 {
     reset();
 }
