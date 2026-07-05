@@ -18,14 +18,6 @@ public:
     
     static constexpr int MAX_INPUT_NUMBER_BUFFER = 2;
 
-    Game() 
-        : fruit_pos_({0, 0}), 
-        input_queue_(std::deque<Vector2>()), 
-        snake_(Snake()), 
-        timer_(MOVE_TIME_DURATION_SECONDS) 
-    {
-    }
-
     void runGame();
     
 private:
@@ -43,9 +35,8 @@ private:
     static void drawCell(int pos_x, int pos_y, Color col);
     static void drawBackground();
     
-    Vector2 fruit_pos_;
-    std::deque<Vector2> input_queue_;
+    Vector2 fruit_pos_ = {0, 0};
     Snake snake_;
-
-    float timer_;
+    float timer_ = MOVE_TIME_DURATION_SECONDS;
+    std::deque<Vector2> input_queue_;
 };
