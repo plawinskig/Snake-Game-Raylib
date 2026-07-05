@@ -29,7 +29,7 @@ private:
     void drawSnake() const;
     void drawFruit() const;
     void getSnakeDirectionFromInput();
-    std::vector<Vector2> getEmptyCells() const;
+    void getEmptyCells();
     [[nodiscard]] bool eatFruit();
 
     static void drawCell(int pos_x, int pos_y, Color col);
@@ -39,4 +39,5 @@ private:
     Snake snake_;
     float timer_ = MOVE_TIME_DURATION_SECONDS;
     std::deque<Vector2> input_queue_;
+    std::vector<Vector2> empty_cells_;
 };

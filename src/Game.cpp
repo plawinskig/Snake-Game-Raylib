@@ -67,15 +67,15 @@ void Game::draw() const
 
 bool Game::setFruit()
 {
-    std::vector<Vector2> empty_cells = getEmptyCells();
+    getEmptyCells();
 
-    if (empty_cells.empty())
+    if (empty_cells_.empty())
     {
         return false;
     }
 
-    int idx = GetRandomValue(0, empty_cells.size() - 1);
-    fruit_pos_ = empty_cells[idx];
+    int idx = GetRandomValue(0, empty_cells_.size() - 1);
+    fruit_pos_ = empty_cells_[idx];
 
     return true;
 }
@@ -137,10 +137,10 @@ void Game::getSnakeDirectionFromInput()
     }
 }
 
-std::vector<Vector2> Game::getEmptyCells() const
+void Game::getEmptyCells()
 {
-    std::vector<Vector2> empty_cells;
-    empty_cells.reserve(CELL_COUNT_X * CELL_COUNT_Y);
+    empty_cells_.clear();
+    empty_cells_.reserve(CELL_COUNT_X * CELL_COUNT_Y);
 
     for (int i = 0; i < CELL_COUNT_X; ++i)
     {
@@ -150,12 +150,10 @@ std::vector<Vector2> Game::getEmptyCells() const
 
             if (!snake_.occupies(vec))
             {
-                empty_cells.push_back(vec);
+                empty_cells_.push_back(vec);
             }
         }
     }
-
-    return empty_cells;
 }
 
 bool Game::eatFruit()
