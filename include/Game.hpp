@@ -32,7 +32,7 @@ private:
     void update();
     void draw() const;
 
-    void setFruit();
+    bool setFruit();
     void resetGame();
     void drawSnake() const;
     void drawFruit() const;

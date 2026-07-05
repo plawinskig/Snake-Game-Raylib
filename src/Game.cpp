@@ -61,12 +61,19 @@ void Game::draw() const
     EndDrawing();
 }
 
-void Game::setFruit()
+bool Game::setFruit()
 {
     std::vector<Vector2> empty_cells = getEmptyCells();
 
+    if (empty_cells.empty())
+    {
+        return false;
+    }
+
     int idx = GetRandomValue(0, empty_cells.size() - 1);
     fruit_pos_ = empty_cells[idx];
+
+    return true;
 }
 
 void Game::resetGame()
@@ -152,7 +159,12 @@ void Game::eatFruit()
     if (snake_.getHeadPos().x == fruit_pos_.x &&
         snake_.getHeadPos().y == fruit_pos_.y)
     {
-        setFruit();
         snake_.extendBody();
+        
+        if (!setFruit()) 
+        {
+            WaitTime(1);
+            resetGame();
+        }
     }
 }
