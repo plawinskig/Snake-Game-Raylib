@@ -67,5 +67,5 @@ void Snake::reset()
     direction_ = {1, 0};
 
     body_.push_back({5,5});
-    body_.push_back({5,4});
+    body_.push_back({4,5});
 }
